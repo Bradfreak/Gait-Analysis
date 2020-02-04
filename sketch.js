@@ -3,6 +3,7 @@ let video;
 let poseNet;
 let pose;
 let skeleton;
+let kneeDist;
 let stridelength;//added by PB
 
 function setup() {
@@ -38,6 +39,7 @@ function draw() {
     let right_leg = pose.rightAnkle;
     let d1 = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
     stridelength = d1;
+    knee = dist(pose.leftKnee.x, pose.leftKnee.y, pose.rightKnee.x, pose.rightKnee.y);
     //fill(255, 0, 0);
     //ellipse(pose.nose.x, pose.nose.y, d);
     fill(0, 0, 255);
