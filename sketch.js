@@ -39,6 +39,14 @@ function draw() {
     let right_leg = pose.rightAnkle;
     let d1 = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
     stridelength = d1;
+    if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
+    {
+      document.getElementById("stride").innerHTML = "Distance Between Feet = "+str(stridelength)+" s.u.";
+    }
+    else
+    {
+      document.getElementById("stride").innerHTML = "<span style='color:red;'>Model Unable to detect feet</span>";
+    }
     knee = dist(pose.leftKnee.x, pose.leftKnee.y, pose.rightKnee.x, pose.rightKnee.y);
     //fill(255, 0, 0);
     //ellipse(pose.nose.x, pose.nose.y, d);
