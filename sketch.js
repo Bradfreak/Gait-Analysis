@@ -41,7 +41,7 @@ function draw() {
     stridelength = d1;
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
     {
-      document.getElementById("stride").innerHTML = "Distance Between Feet = "+str(stridelength)+" s.u.";
+      document.getElementById("stride").innerHTML = "Stride Length = "+str(stridelength)+" s.u.";
     }
     else
     {
