@@ -4,43 +4,26 @@
   <head>
     <h1> Gait Analysis </h1>
 
-    <meta charset="utf-8"/>
-    <script src="p5.min.js"></script>
-    <script src="ml5.min.js"></script>
+    <meta charset = "utf-8"/>
+    <script src = "p5.min.js"> </script>
+    <script src = "ml5.min.js"> </script>
   </head>
-
-<<<<<<< HEAD
+  
   <body>
+    <div>
     <script src="sketch.js"></script>
-    
-    <p id="stride"></p>
-    <p id="time"></p>
+    </div>
+    <br />
+    <div>
+    <p id="stride"></p> <!-- Display stride length -->
+    <p id="rightstride"></p> <!-- Display stride length -->
+    <p id="leftstride"></p> <!-- Display stride length -->
     <p id="knee"></p> <!-- display Knee distance -->
-
-    <select id="time_cal">
-      <option value="None" selected> Select </option>
-      <option value="1"> Start </option>
-      <option value="2"> Stop </option>
+    <select id="id1" >
+      <option value="0">Select options</option>
+      <option value="1">Right stride</option>
+      <option value="2">Left stride</option>
     </select>
+    </div>
   </body>
-=======
-<body>
-  <div>
-  <script src="sketch.js"></script>
-  </div>
-  <br />
-  <div>
-  <p id="stride"></p> <!-- Display stride length -->
-  <p id="rightstride"></p> <!-- Display stride length -->
-  <p id="leftstride"></p> <!-- Display stride length -->
-  <p id="knee"></p> <!-- display Knee distance -->
-  <select id="id1" >
-    <option value="0">Select options</option>
-    <option value="1">Right stride</option>
-    <option value="2">Left stride</option>
-  </select>
-  </div>
-</body>
->>>>>>> 663f853c11068df9a16c9b8a46685fbe32324c7a
-
 </html>
