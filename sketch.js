@@ -9,6 +9,7 @@ var start = false, end = false;
 var i = 0;
 var start_t, end_t;
 var d = new Date();
+var n1,n2;
 
 function setup() {
   createCanvas(640, 480);
@@ -62,15 +63,34 @@ function draw() {
     }
 
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
+    let d1 = 0,d2 = 0;
+    var s = document.getElementById("id1");
+    if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "1" )
     {
-      document.getElementById("stride").innerHTML = "Stride Length = "+str(stridelength)+" s.u.";
+      d1 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
+      document.getElementById("rightstride").innerHTML = "Right step Length = "+str(d1)+" s.u.";
+      n1 = d1;
     }
-    else
+    else if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "2")
     {
-      document.getElementById("stride").innerHTML = "<span style='color:red;'>Model Unable to detect feet</span>";
+      d2 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
+      document.getElementById("leftstride").innerHTML = "Left step Length = "+str(d2)+" s.u.";
+      n2 = d2;
+    }
+    else if(s.value == "0")
+    {
+      stridelength = n1 + n2;
+      if(stridelength > 0)
+      {
+        document.getElementById("stride").innerHTML = "<span style='color:green;'>Stride Length = "+str(stridelength)+" s.u.</span>";
+      }
+      else
+      {
+        document.getElementById("stride").innerHTML = "<span style='color:red;'>Unable to detect feet</span>";
+      }
     }
     knee = dist(pose.leftKnee.x, pose.leftKnee.y, pose.rightKnee.x, pose.rightKnee.y);
-    if(pose.leftKnee >= 0.8 && pose.rightKnee >= 0.8)
+    if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
     {
       document.getElementById("knee").innerHTML = "Distance Between Knees = "+str(knee)+" s.u.";
     }
