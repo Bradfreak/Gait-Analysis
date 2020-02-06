@@ -5,6 +5,10 @@ let pose;
 let skeleton;
 let kneeDist;
 let stridelength;//added by PB
+var start = false, end = false;
+var i = 0;
+var start_t, end_t;
+var d = new Date();
 
 function setup() {
   createCanvas(640, 480);
@@ -32,13 +36,31 @@ function draw() {
   image(video, 0, 0);
 
   if (pose) {
-    let eyeR = pose.rightEye;
-    let eyeL = pose.leftEye;
-    let d = dist(eyeR.x, eyeR.y, eyeL.x, eyeL.y);
+    // if (start == false)
+    // {
+    //   start_t = d.getTime();
+    //   start = true;
+    // }
     let left_leg = pose.leftAnkle;
     let right_leg = pose.rightAnkle;
     let d1 = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
     stridelength = d1;
+
+    var val = document.getElementById("time_cal").value;
+    if (val == "1" && start == false)
+    {
+      start = true;
+      start_t = d.getTime();
+      document.getElementById("time").innerHTML = "Time is "+str(start_t);
+    }
+    else if (val == "2" && end == false)
+    {
+      end = true;
+      var d = new Date();
+      end_t = d.getTime();
+      document.getElementById("time").innerHTML = "Time is "+str(end_t - start_t);
+    }
+
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
     {
       document.getElementById("stride").innerHTML = "Stride Length = "+str(stridelength)+" s.u.";
@@ -77,18 +99,9 @@ function draw() {
       line(a.position.x, a.position.y, b.position.x, b.position.y);
     }
   }
+  // else if (start)
+  // {
+  //   end_t = d.getTime();
+  //   document.getElementById("time").innerHTML = "Time is "+str(end_t - start_t);
+  // }
 }
-/*
-stridelength = sl();
-function sl()
-{
-  if (pose)
-  {
-    let left_leg = pose.leftAnkle;
-    let right_leg = pose.rightAnkle;
-    let d = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
-    stridelength = d;
-    console.log(d);
-  }
-}
-*/

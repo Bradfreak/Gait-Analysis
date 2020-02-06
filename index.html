@@ -2,6 +2,8 @@
 <html>
 
   <head>
+    <h1> Gait Analysis </h1>
+
     <meta charset="utf-8"/>
     <script src="p5.min.js"></script>
     <script src="ml5.min.js"></script>
@@ -11,7 +13,14 @@
     <script src="sketch.js"></script>
     
     <p id="stride"></p>
+    <p id="time"></p>
     <p id="knee"></p> <!-- display Knee distance -->
+
+    <select id="time_cal">
+      <option value="None" selected> Select </option>
+      <option value="1"> Start </option>
+      <option value="2"> Stop </option>
+    </select>
   </body>
 
 </html>
