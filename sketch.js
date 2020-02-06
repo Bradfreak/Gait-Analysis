@@ -48,6 +48,14 @@ function draw() {
       document.getElementById("stride").innerHTML = "<span style='color:red;'>Model Unable to detect feet</span>";
     }
     knee = dist(pose.leftKnee.x, pose.leftKnee.y, pose.rightKnee.x, pose.rightKnee.y);
+    if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
+    {
+      document.getElementById("knee").innerHTML = "Distance Between Knees = "+str(knee)+" s.u.";
+    }
+    else
+    {
+      document.getElementById("knee").innerHTML = "<span style='color:red;'>Model Unable to detect Knees</span>";
+    }
     //fill(255, 0, 0);
     //ellipse(pose.nose.x, pose.nose.y, d);
     fill(0, 0, 255);
