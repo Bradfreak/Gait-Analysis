@@ -5,12 +5,8 @@ let pose;
 let skeleton;
 let kneeDist;
 let stridelength;//added by PB
-var start = false, end = false;
-var i = 0;
-var start_t, end_t;
-var d = new Date();
 var n1,n2;
-
+var cal;
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
@@ -37,44 +33,25 @@ function draw() {
   image(video, 0, 0);
 
   if (pose) {
-    // if (start == false)
-    // {
-    //   start_t = d.getTime();
-    //   start = true;
-    // }
+    var a = document.getElementById("cal");
+    cal = parseFloat(a.value);
+    let eyeR = pose.rightEye;
+    let eyeL = pose.leftEye;
+    let d = dist(eyeR.x, eyeR.y, eyeL.x, eyeL.y);
     let left_leg = pose.leftAnkle;
     let right_leg = pose.rightAnkle;
-    let d1 = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
-    stridelength = d1;
-
-    var val = document.getElementById("time_cal").value;
-    if (val == "1" && start == false)
-    {
-      start = true;
-      start_t = d.getTime();
-      document.getElementById("time").innerHTML = "Time is "+str(start_t);
-    }
-    else if (val == "2" && end == false)
-    {
-      end = true;
-      var d = new Date();
-      end_t = d.getTime();
-      document.getElementById("time").innerHTML = "Time is "+str(end_t - start_t);
-    }
-
-    if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
     let d1 = 0,d2 = 0;
     var s = document.getElementById("id1");
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "1" )
     {
       d1 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
-      document.getElementById("rightstride").innerHTML = "Right step Length = "+str(d1)+" s.u.";
+      document.getElementById("rightstride").innerHTML = "Right step Length = "+str(d1/cal)+" cm";
       n1 = d1;
     }
     else if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "2")
     {
       d2 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
-      document.getElementById("leftstride").innerHTML = "Left step Length = "+str(d2)+" s.u.";
+      document.getElementById("leftstride").innerHTML = "Left step Length = "+str(d2/cal)+" cm";
       n2 = d2;
     }
     else if(s.value == "0")
@@ -82,7 +59,7 @@ function draw() {
       stridelength = n1 + n2;
       if(stridelength > 0)
       {
-        document.getElementById("stride").innerHTML = "<span style='color:green;'>Stride Length = "+str(stridelength)+" s.u.</span>";
+        document.getElementById("stride").innerHTML = "<span style='color:green;'>Stride Length = "+str(stridelength/cal)+" cm</span>";
       }
       else
       {
@@ -92,7 +69,7 @@ function draw() {
     knee = dist(pose.leftKnee.x, pose.leftKnee.y, pose.rightKnee.x, pose.rightKnee.y);
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5)
     {
-      document.getElementById("knee").innerHTML = "Distance Between Knees = "+str(knee)+" s.u.";
+      document.getElementById("knee").innerHTML = "Distance Between Knees = "+str(knee/cal)+" cm";
     }
     else
     {
@@ -119,9 +96,18 @@ function draw() {
       line(a.position.x, a.position.y, b.position.x, b.position.y);
     }
   }
-  // else if (start)
-  // {
-  //   end_t = d.getTime();
-  //   document.getElementById("time").innerHTML = "Time is "+str(end_t - start_t);
-  // }
 }
+/*
+stridelength = sl();
+function sl()
+{
+  if (pose)
+  {
+    let left_leg = pose.leftAnkle;
+    let right_leg = pose.rightAnkle;
+    let d = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
+    stridelength = d;
+    console.log(d);
+  }
+}
+*/
