@@ -7,6 +7,8 @@ let kneeDist;
 let stridelength;//added by PB
 var n1,n2;
 var cal;
+var height = 0;
+
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
@@ -40,8 +42,14 @@ function draw() {
     let d = dist(eyeR.x, eyeR.y, eyeL.x, eyeL.y);
     let left_leg = pose.leftAnkle;
     let right_leg = pose.rightAnkle;
-    let d1 = 0,d2 = 0;
+    let d1 = 0,d2 = 0,d3 = 0;
     var s = document.getElementById("id1");
+    if(left_leg.confidence >= 0.5 && eyeL.confidence >= 0.5)
+    {
+      d3 = dist(eyeL.x,eyeL.y,left_leg.x,left_leg.y);
+      height = d3;
+      document.getElementById("height").innerHTML = "Height = "+str(height/cal)+" cm";
+    }
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "1" )
     {
       d1 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
