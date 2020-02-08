@@ -44,11 +44,18 @@ function draw() {
     let right_leg = pose.rightAnkle;
     let d1 = 0,d2 = 0,d3 = 0;
     var s = document.getElementById("id1");
-    if(left_leg.confidence >= 0.5 && eyeL.confidence >= 0.5)
+    if (a.value != "")
     {
-      d3 = dist(eyeL.x,eyeL.y,left_leg.x,left_leg.y);
-      height = d3;
-      document.getElementById("height").innerHTML = "Height = "+str(height/cal)+" cm";
+      if(left_leg.confidence >= 0.5 && eyeL.confidence >= 0.5)
+      {
+        d3 = dist(eyeL.x,eyeL.y,left_leg.x,left_leg.y);
+        height = d3;
+        document.getElementById("height").innerHTML = "Height = "+str(height/cal)+" cm";
+      }
+    }
+    else
+    {
+      document.getElementById("height").innerHTML = "Please provide the calibration factor for mesuring height";
     }
     if(left_leg.confidence >= 0.5 && right_leg.confidence >= 0.5 && s.value == "1" )
     {
