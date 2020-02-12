@@ -112,17 +112,3 @@ function draw() {
     }
   }
 }
-/*
-stridelength = sl();
-function sl()
-{
-  if (pose)
-  {
-    let left_leg = pose.leftAnkle;
-    let right_leg = pose.rightAnkle;
-    let d = dist(left_leg.x,left_leg.y,right_leg.x,right_leg.y);
-    stridelength = d;
-    console.log(d);
-  }
-}
-*/
