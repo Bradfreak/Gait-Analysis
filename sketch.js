@@ -34,7 +34,19 @@ function modelLoaded()
 function draw() {
   image(video, 0, 0);
 
+  function display_parameters()
+  {
+    x = 1;
+    let left_leg = pose.leftAnkle;
+    let right_leg = pose.rightAnkle;
+    var d1 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
+
+    setTimeout(display_parameters, 10000);
+    console.log(d1);
+  }
+
   if (pose) {
+    display_parameters();
     var a = document.getElementById("cal");
     cal = parseFloat(a.value);
     let eyeR = pose.rightEye;
