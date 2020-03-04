@@ -23,36 +23,35 @@
   <p id="leftstride"></p> <!-- Display stride length -->
   <p id="knee"></p> <!-- display Knee distance -->
   <p id="height"></p>
-  <select id="id1" >
-    <option value="0">Select options</option>
-    <option value="1">Right stride</option>
-    <option value="2">Left stride</option>
-  </select>
   </div>
   <div id="pic">
     <script src="sketch.js"></script>
   </div>
-  <script>
-    var fs = require('fs-js');
-    fs.open('myfile', 'wx', (err, fd) => {
-    if (err) {
-      if (err.code === 'EEXIST') {
-        console.error('myfile already exists');
-        return;
-      }
-   
-      throw err;
-    }
-   
-    writeMyData(fd);
-  });
-  </script>
+
   <div class=body>
     <form name=body_metrics>
       <input type=text name=age value="", placeholder="Age"> <br>
       <input type=text name=gender value="", placeholder="Gender"> <br>
       <input type=text name=weight value="", placeholder="Weight"> <br>
     </form>
+  </div>
+  </div>
+
+  <div>
+    <textarea id="inputTextToSave"></textarea>
+    <select id="id1" >
+      <option value="0">Select options</option>
+      <option value="1">Right stride</option>
+      <option value="2">Left stride</option>
+      <option value="3">Stop Collection</option>
+    </select>
+    <script>function savefile(){
+      var content = document.getElementById("inputTextToSave").value;
+      uriContent = "data:application/octet-stream," + encodeURIComponent(content);
+      document.getElementById("dlink").innerHTML = "<a href=" + uriContent + " download=\"savedfile.txt\">Here is the download link</a>";
+    }</script>
+    <button onclick="savefile()">SAVE</button>
+    <p id="dlink"></p>
   </div>
   </body>
 

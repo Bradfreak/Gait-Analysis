@@ -8,6 +8,9 @@ let stridelength;//added by PB
 var n1,n2;
 var cal;
 var height = 0;
+let rleg,lleg;
+//var fs = require('fs-js');
+//var timecount = 0;
 
 function setup() {
   createCanvas(640, 480);
@@ -33,20 +36,9 @@ function modelLoaded()
 
 function draw() {
   image(video, 0, 0);
-
-  function display_parameters()
+  
+  if (pose) 
   {
-    x = 1;
-    let left_leg = pose.leftAnkle;
-    let right_leg = pose.rightAnkle;
-    var d1 = dist(left_leg.x, left_leg.y, right_leg.x, right_leg.y);
-
-    setTimeout(display_parameters, 10000);
-    console.log(d1);
-  }
-
-  if (pose) {
-    display_parameters();
     var a = document.getElementById("cal");
     cal = parseFloat(a.value);
     let eyeR = pose.rightEye;
@@ -56,6 +48,28 @@ function draw() {
     let right_leg = pose.rightAnkle;
     let d1 = 0,d2 = 0,d3 = 0;
     var s = document.getElementById("id1");
+    //var fs = require('fs-js');
+    rleg = right_leg;
+    lleg = left_leg;
+    if(s.value != 3)
+    {
+      document.getElementById("inputTextToSave").value = document.getElementById("inputTextToSave").value +rleg.x+","+rleg.y+","+lleg.x+","+lleg.y+"\n"; 
+      console.log("Right Leg: ("+rleg.x+","+rleg.y+")");
+      console.log("Left Leg: ("+lleg.x+","+lleg.y+")\n");
+    }
+    /*fs.open('out.txt', 'wx', (err, fd) => {
+    if (err) 
+    {
+      if (err.code === 'EEXIST') {
+        console.error('myfile already exists');
+        return;
+      }
+   
+      throw err;
+    }
+   
+    writeMyData(fd);
+  }); */ 
     if (a.value != "")
     {
       if(left_leg.confidence >= 0.5 && eyeL.confidence >= 0.5)
@@ -123,4 +137,15 @@ function draw() {
       line(a.position.x, a.position.y, b.position.x, b.position.y);
     }
   }
+}
+
+function w2f()
+{
+  
+
+
+}
+
+function put(){
+  getElementById("try").value = "check this ass";
 }
